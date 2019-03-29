@@ -60,7 +60,7 @@ tracks:
       -i :{release_inc} --os-name debian --os-not-required
     - git-bloom-generate -y rosrpm --prefix release/:{ros_distro} :{ros_distro} -i
       :{release_inc}
-    devel_branch: crystal
+    devel_branch: ros2
     last_version: 2.2.0
     name: upstream
     patches: null
@@ -69,7 +69,7 @@ tracks:
     release_tag: :{version}
     ros_distro: crystal
     vcs_type: git
-    vcs_uri: https://github.com/ros2/depthimage_to_laserscan.git
+    vcs_uri: https://github.com/ros-perception/depthimage_to_laserscan.git
     version: :{auto}
   r2b2:
     actions:
