@@ -1,0 +1,12 @@
+Source: ros-dashing-depthimage-to-laserscan
+Section: misc
+Priority: optional
+Maintainer: Chris Lalancette <clalancette@openrobotics.org>
+Build-Depends: debhelper (>= 9.0.0), libopencv-dev, ros-dashing-ament-cmake-gtest, ros-dashing-ament-cmake-ros, ros-dashing-image-geometry, ros-dashing-rclcpp, ros-dashing-rclcpp-components, ros-dashing-sensor-msgs, ros-dashing-ros-workspace
+Homepage: http://ros.org/wiki/depthimage_to_laserscan
+Standards-Version: 3.9.2
+
+Package: ros-dashing-depthimage-to-laserscan
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libopencv-dev, ros-dashing-image-geometry, ros-dashing-rclcpp, ros-dashing-rclcpp-components, ros-dashing-sensor-msgs, ros-dashing-ros-workspace
+Description: depthimage_to_laserscan
