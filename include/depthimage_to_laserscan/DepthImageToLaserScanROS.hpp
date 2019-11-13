@@ -27,7 +27,7 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/* 
+/*
  * Author: Chad Rockey
  */
 
@@ -39,32 +39,31 @@
 #include <sensor_msgs/msg/image.hpp>
 #include <sensor_msgs/msg/laser_scan.hpp>
 
-#include <depthimage_to_laserscan/DepthImageToLaserScan.h>
+#include <depthimage_to_laserscan/DepthImageToLaserScan.hpp>
 #include <depthimage_to_laserscan/DepthImageToLaserScanROS_export.h>
 
 namespace depthimage_to_laserscan
-{ 
-  class DEPTHIMAGETOLASERSCANROS_EXPORT DepthImageToLaserScanROS
+{
+  class DEPTHIMAGETOLASERSCANROS_EXPORT DepthImageToLaserScanROS final : public rclcpp::Node
   {
   public:
-    explicit DepthImageToLaserScanROS(rclcpp::Node::SharedPtr & node);
-    
+    explicit DepthImageToLaserScanROS(const rclcpp::NodeOptions & options);
+
     ~DepthImageToLaserScanROS();
 
   private:
     /**
      * Callback for image_transport
-     * 
+     *
      * Callback for depth image.  Publishes laserscan at the end of this callback.
-     * 
+     *
      * @param image Image provided by image_transport.
-     * 
+     *
      */
     void depthCb(const sensor_msgs::msg::Image::SharedPtr image);
 
     void infoCb(sensor_msgs::msg::CameraInfo::SharedPtr info);
 
-    rclcpp::Node::SharedPtr node_;
     sensor_msgs::msg::CameraInfo::SharedPtr cam_info_;
 
     rclcpp::Subscription<sensor_msgs::msg::CameraInfo>::SharedPtr cam_info_sub_;
@@ -74,8 +73,6 @@ namespace depthimage_to_laserscan
 
     depthimage_to_laserscan::DepthImageToLaserScan dtl_; ///< Instance of the DepthImageToLaserScan conversion class.
   };
-  
-  
 } // depthimage_to_laserscan
 
 #endif
