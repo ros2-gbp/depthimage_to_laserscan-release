@@ -1,3 +1,26 @@
+## depthimage_to_laserscan (dashing) - 2.2.5-1
+
+The packages in the `depthimage_to_laserscan` repository were released into the `dashing` distro by running `/usr/bin/bloom-release --rosdistro dashing --track dashing depthimage_to_laserscan` on `Wed, 13 Nov 2019 13:55:55 -0000`
+
+The `depthimage_to_laserscan` package was released.
+
+Version of package(s) in repository `depthimage_to_laserscan`:
+
+- upstream repository: https://github.com/ros-perception/depthimage_to_laserscan.git
+- release repository: https://github.com/ros2-gbp/depthimage_to_laserscan-release.git
+- rosdistro version: `2.2.2-1`
+- old version: `2.2.2-1`
+- new version: `2.2.5-1`
+
+Versions of tools used:
+
+- bloom version: `0.9.0`
+- catkin_pkg version: `0.4.14`
+- rosdep version: `0.17.1`
+- rosdistro version: `0.7.5`
+- vcstools version: `0.1.42`
+
+
 ## depthimage_to_laserscan (eloquent) - 2.2.4-1
 
 The packages in the `depthimage_to_laserscan` repository were released into the `eloquent` distro by running `/usr/bin/bloom-release --rosdistro eloquent --track eloquent depthimage_to_laserscan` on `Wed, 23 Oct 2019 22:33:10 -0000`
