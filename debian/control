@@ -1,0 +1,12 @@
+Source: ros-eloquent-depthimage-to-laserscan
+Section: misc
+Priority: optional
+Maintainer: Chris Lalancette <clalancette@openrobotics.org>
+Build-Depends: debhelper (>= 9.0.0), libopencv-dev, ros-eloquent-ament-cmake-gtest, ros-eloquent-ament-cmake-ros, ros-eloquent-image-geometry, ros-eloquent-rclcpp, ros-eloquent-rclcpp-components, ros-eloquent-sensor-msgs, ros-eloquent-ros-workspace
+Homepage: http://ros.org/wiki/depthimage_to_laserscan
+Standards-Version: 3.9.2
+
+Package: ros-eloquent-depthimage-to-laserscan
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libopencv-dev, ros-eloquent-image-geometry, ros-eloquent-rclcpp, ros-eloquent-rclcpp-components, ros-eloquent-sensor-msgs, ros-eloquent-ros-workspace
+Description: depthimage_to_laserscan
