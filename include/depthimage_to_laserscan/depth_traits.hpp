@@ -27,54 +27,45 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-/* 
+/*
  * Author: Chad Rockey
  */
 
-#ifndef DEPTH_IMAGE_TO_LASERSCAN_ROS
-#define DEPTH_IMAGE_TO_LASERSCAN_ROS
+#ifndef DEPTH_IMAGE_TO_LASERSCAN_DEPTH_TRAITS
+#define DEPTH_IMAGE_TO_LASERSCAN_DEPTH_TRAITS
 
-#include <rclcpp/rclcpp.hpp>
-#include <sensor_msgs/msg/camera_info.hpp>
-#include <sensor_msgs/msg/image.hpp>
-#include <sensor_msgs/msg/laser_scan.hpp>
+#include <algorithm>
+#include <limits>
+#include <vector>
 
-#include <depthimage_to_laserscan/DepthImageToLaserScan.h>
+namespace depthimage_to_laserscan {
 
-namespace depthimage_to_laserscan
-{ 
-  class DepthImageToLaserScanROS
+// Encapsulate differences between processing float and uint16_t depths
+template<typename T> struct DepthTraits {};
+
+template<>
+struct DepthTraits<uint16_t>
+{
+  static inline bool valid(uint16_t depth) { return depth != 0; }
+  static inline float toMeters(uint16_t depth) { return depth * 0.001f; } // originally mm
+  static inline uint16_t fromMeters(float depth) { return (depth * 1000.0f) + 0.5f; }
+  static inline void initializeBuffer(std::vector<uint8_t>&) {} // Already zero-filled
+};
+
+template<>
+struct DepthTraits<float>
+{
+  static inline bool valid(float depth) { return std::isfinite(depth); }
+  static inline float toMeters(float depth) { return depth; }
+  static inline float fromMeters(float depth) { return depth; }
+
+  static inline void initializeBuffer(std::vector<uint8_t>& buffer)
   {
-  public:
-    explicit DepthImageToLaserScanROS(rclcpp::Node::SharedPtr & node);
-    
-    ~DepthImageToLaserScanROS();
-
-  private:
-    /**
-     * Callback for image_transport
-     * 
-     * Callback for depth image.  Publishes laserscan at the end of this callback.
-     * 
-     * @param image Image provided by image_transport.
-     * 
-     */
-    void depthCb(const sensor_msgs::msg::Image::SharedPtr image);
-
-    void infoCb(sensor_msgs::msg::CameraInfo::SharedPtr info);
-
-    rclcpp::Node::SharedPtr node_;
-    sensor_msgs::msg::CameraInfo::SharedPtr cam_info_;
-
-    rclcpp::Subscription<sensor_msgs::msg::CameraInfo>::SharedPtr cam_info_sub_;
-    rclcpp::Subscription<sensor_msgs::msg::Image>::SharedPtr depth_image_sub_;
-
-    rclcpp::Publisher<sensor_msgs::msg::LaserScan>::SharedPtr scan_pub_;
-
-    depthimage_to_laserscan::DepthImageToLaserScan dtl_; ///< Instance of the DepthImageToLaserScan conversion class.
-  };
-  
-  
-} // depthimage_to_laserscan
+    float* start = reinterpret_cast<float*>(&buffer[0]);
+    float* end = reinterpret_cast<float*>(&buffer[0] + buffer.size());
+    std::fill(start, end, std::numeric_limits<float>::quiet_NaN());
+  }
+};
+} // namespace depthimage_to_laserscan
 
 #endif
