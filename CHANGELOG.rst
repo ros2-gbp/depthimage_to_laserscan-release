@@ -2,6 +2,22 @@
 Changelog for package depthimage_to_laserscan
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+2.2.5 (2019-11-13)
+------------------
+* Update the README.md to describe the topics and parameters.
+* Add in a launch file for composable node.
+* Rename launch file to conform to recommendations.
+* Remove unnecessary Depth.cfg.
+* Make depthimage_to_laserscan composable.
+* Rename header files to .hpp
+* Style cleanup.
+* Contributors: Chris Lalancette
+
+2.2.4 (2019-10-23)
+------------------
+* Export interfaces for Win32 Shared Lib (`#44 <https://github.com/ros-perception/depthimage_to_laserscan/issues/44>`_)
+* Contributors: Sean Yen
+
 2.2.2 (2019-09-27)
 ------------------
 * update code to be consist with new ros2 core (`#42 <https://github.com/ros-perception/depthimage_to_laserscan/issues/42>`_)
