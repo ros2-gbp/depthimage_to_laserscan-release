@@ -47,7 +47,8 @@
 
 namespace depthimage_to_laserscan {
 
-DepthImageToLaserScan::DepthImageToLaserScan(){
+DepthImageToLaserScan::DepthImageToLaserScan(float scan_time, float range_min, float range_max, int scan_height, const std::string& frame_id)
+: scan_time_(scan_time), range_min_(range_min), range_max_(range_max), scan_height_(scan_height), output_frame_id_(frame_id){
 }
 
 DepthImageToLaserScan::~DepthImageToLaserScan(){
@@ -71,10 +72,7 @@ bool DepthImageToLaserScan::use_point(const float new_value, const float old_val
 
   // Infs are preferable over NaNs (more information)
   if(!new_finite && !old_finite){ // Both are not NaN or Inf.
-    if(!std::isnan(new_value)){ // new is not NaN, so use it's +-Inf value.
-      return true;
-    }
-    return false; // Do not replace old_value
+    return !std::isnan(new_value); // new is not NaN, so use it's +-Inf value.
   }
 
   // If not in range, don't bother
@@ -128,7 +126,7 @@ sensor_msgs::msg::LaserScan::UniquePtr DepthImageToLaserScan::convert_msg(const 
   scan_msg->range_max = range_max_;
 
   // Check scan_height vs image_height
-  if(scan_height_/2 > cam_model_.cy() || scan_height_/2 > depth_msg->height - cam_model_.cy()){
+  if(static_cast<double>(scan_height_)/2.0 > cam_model_.cy() || static_cast<double>(scan_height_)/2.0 > depth_msg->height - cam_model_.cy()){
     std::stringstream ss;
     ss << "scan_height ( " << scan_height_ << " pixels) is too large for the image height.";
     throw std::runtime_error(ss.str());
@@ -151,23 +149,6 @@ sensor_msgs::msg::LaserScan::UniquePtr DepthImageToLaserScan::convert_msg(const 
   }
 
   return scan_msg;
-}
-
-void DepthImageToLaserScan::set_scan_time(const float scan_time){
-  scan_time_ = scan_time;
-}
-
-void DepthImageToLaserScan::set_range_limits(const float range_min, const float range_max){
-  range_min_ = range_min;
-  range_max_ = range_max;
-}
-
-void DepthImageToLaserScan::set_scan_height(const int scan_height){
-  scan_height_ = scan_height;
-}
-
-void DepthImageToLaserScan::set_output_frame(const std::string output_frame_id){
-  output_frame_id_ = output_frame_id;
 }
 
 }  // namespace depthimage_to_laserscan

@@ -34,6 +34,8 @@
 #ifndef DEPTH_IMAGE_TO_LASERSCAN_ROS
 #define DEPTH_IMAGE_TO_LASERSCAN_ROS
 
+#include <memory>
+
 #include <rclcpp/rclcpp.hpp>
 #include <sensor_msgs/msg/camera_info.hpp>
 #include <sensor_msgs/msg/image.hpp>
@@ -49,7 +51,7 @@ namespace depthimage_to_laserscan
   public:
     explicit DepthImageToLaserScanROS(const rclcpp::NodeOptions & options);
 
-    ~DepthImageToLaserScanROS();
+    ~DepthImageToLaserScanROS() override;
 
   private:
     /**
@@ -71,8 +73,8 @@ namespace depthimage_to_laserscan
 
     rclcpp::Publisher<sensor_msgs::msg::LaserScan>::SharedPtr scan_pub_;
 
-    depthimage_to_laserscan::DepthImageToLaserScan dtl_; ///< Instance of the DepthImageToLaserScan conversion class.
+    std::unique_ptr<depthimage_to_laserscan::DepthImageToLaserScan> dtl_; ///< Instance of the DepthImageToLaserScan conversion class.
   };
-} // depthimage_to_laserscan
+}  // namespace depthimage_to_laserscan
 
 #endif
