@@ -1,3 +1,26 @@
+## depthimage_to_laserscan (rolling) - 2.5.0-1
+
+The packages in the `depthimage_to_laserscan` repository were released into the `rolling` distro by running `/usr/bin/bloom-release --track rolling --rosdistro rolling depthimage_to_laserscan` on `Sat, 22 Jan 2022 13:42:58 -0000`
+
+The `depthimage_to_laserscan` package was released.
+
+Version of package(s) in repository `depthimage_to_laserscan`:
+
+- upstream repository: https://github.com/ros-perception/depthimage_to_laserscan.git
+- release repository: https://github.com/ros2-gbp/depthimage_to_laserscan-release.git
+- rosdistro version: `2.3.1-1`
+- old version: `2.3.1-1`
+- new version: `2.5.0-1`
+
+Versions of tools used:
+
+- bloom version: `0.10.7`
+- catkin_pkg version: `0.4.24`
+- rosdep version: `0.21.0`
+- rosdistro version: `0.8.3`
+- vcstools version: `0.1.42`
+
+
 ## depthimage_to_laserscan (foxy) - 2.3.1-1
 
 The packages in the `depthimage_to_laserscan` repository were released into the `foxy` distro by running `/usr/bin/bloom-release --track foxy --rosdistro foxy depthimage_to_laserscan` on `Thu, 08 Apr 2021 18:54:01 -0000`
