@@ -1,0 +1,12 @@
+Source: ros-humble-depthimage-to-laserscan
+Section: misc
+Priority: optional
+Maintainer: Chris Lalancette <clalancette@openrobotics.org>
+Build-Depends: debhelper (>= 9.0.0), libopencv-dev, ros-humble-ament-cmake-gtest <!nocheck>, ros-humble-ament-cmake-ros, ros-humble-image-geometry, ros-humble-rclcpp, ros-humble-rclcpp-components, ros-humble-sensor-msgs, ros-humble-ros-workspace
+Homepage: http://ros.org/wiki/depthimage_to_laserscan
+Standards-Version: 3.9.2
+
+Package: ros-humble-depthimage-to-laserscan
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libopencv-dev, ros-humble-image-geometry, ros-humble-rclcpp, ros-humble-rclcpp-components, ros-humble-sensor-msgs, ros-humble-ros-workspace
+Description: depthimage_to_laserscan
